@@ -1,0 +1,220 @@
+package DOCSYSTEM;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
+import java.awt.Color;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.UIManager;
+import java.awt.SystemColor;
+import javax.swing.border.MatteBorder;
+
+public class docverify extends JInternalFrame {
+	private JTextField eenroll;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					docverify frame = new docverify();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public docverify() {
+		setResizable(true);
+		setFont(new Font("Dialog", Font.PLAIN, 22));
+		setBounds(100, 100, 1002, 850);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
+		panel.setBackground(SystemColor.text);
+		panel.setBounds(0, 0, 986, 186);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblDocumentVerify = new JLabel("Document Verify");
+		lblDocumentVerify.setForeground(new Color(0, 128, 128));
+		lblDocumentVerify.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDocumentVerify.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+		lblDocumentVerify.setBounds(221, 13, 523, 49);
+		panel.add(lblDocumentVerify);
+		
+		JLabel lblEnterEnrollmentNumber = new JLabel("Enter Enrollment Number");
+		lblEnterEnrollmentNumber.setBackground(SystemColor.text);
+		lblEnterEnrollmentNumber.setForeground(new Color(0, 0, 128));
+		lblEnterEnrollmentNumber.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		lblEnterEnrollmentNumber.setBounds(30, 75, 261, 36);
+		panel.add(lblEnterEnrollmentNumber);
+		
+		JLabel lblSelectBranch = new JLabel("Select Branch");
+		lblSelectBranch.setBackground(SystemColor.text);
+		lblSelectBranch.setForeground(new Color(0, 0, 128));
+		lblSelectBranch.setHorizontalTextPosition(SwingConstants.LEFT);
+		lblSelectBranch.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		lblSelectBranch.setBounds(30, 124, 261, 36);
+		panel.add(lblSelectBranch);
+		
+		eenroll = new JTextField();
+		eenroll.setBackground(SystemColor.inactiveCaptionBorder);
+		eenroll.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		eenroll.setBackground(UIManager.getColor("Button.highlight"));
+		eenroll.setBounds(323, 75, 367, 36);
+		panel.add(eenroll);
+		eenroll.setColumns(10);
+		
+		JComboBox dbranch = new JComboBox();
+		dbranch.setForeground(new Color(0, 0, 128));
+		dbranch.setBackground(Color.WHITE);
+		dbranch.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		dbranch.setBounds(323, 125, 162, 36);
+		panel.add(dbranch);
+		dbranch.addItem("CM");
+		dbranch.addItem("ME");
+		dbranch.addItem("EE");
+		dbranch.addItem("E&TC");
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.control);
+		panel_1.setBounds(0, 188, 986, 626);
+		getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		JCheckBox lccbox = new JCheckBox("8th,9th,10th Original Mark sheet 10th,12th");
+		lccbox.setBackground(SystemColor.text);
+		lccbox.setForeground(new Color(0, 0, 128));
+		lccbox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				
+			}
+		});
+		lccbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lccbox.setBounds(14, 73, 443, 42);
+		panel_1.add(lccbox);
+		
+		JLabel lblNewLabel = new JLabel("Document List");
+		lblNewLabel.setForeground(new Color(0, 128, 128));
+		lblNewLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
+		lblNewLabel.setBackground(Color.CYAN);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		lblNewLabel.setBounds(42, 13, 892, 37);
+		panel_1.add(lblNewLabel);
+		
+		JCheckBox ms10cbox = new JCheckBox("Original Leaving Certificate(L.C)");
+		ms10cbox.setBackground(SystemColor.text);
+		ms10cbox.setForeground(new Color(0, 0, 128));
+		ms10cbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		ms10cbox.setBounds(14, 130, 443, 42);
+		panel_1.add(ms10cbox);
+		
+		JCheckBox ms12cbox = new JCheckBox("Caste Certificate(If applicable)");
+		ms12cbox.setBackground(SystemColor.text);
+		ms12cbox.setForeground(new Color(0, 0, 128));
+		ms12cbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		ms12cbox.setBounds(14, 189, 443, 42);
+		panel_1.add(ms12cbox);
+		
+		JButton dsavebtn = new JButton("Save");
+		dsavebtn.setForeground(new Color(0, 0, 128));
+		dsavebtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		dsavebtn.setBounds(162, 518, 115, 42);
+		panel_1.add(dsavebtn);
+		
+		JButton dupdatebtn = new JButton("Update");
+		dupdatebtn.setForeground(new Color(0, 0, 128));
+		dupdatebtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		dupdatebtn.setBounds(342, 518, 115, 42);
+		panel_1.add(dupdatebtn);
+		
+		JButton dprintbtn = new JButton("Print");
+		dprintbtn.setForeground(new Color(0, 0, 128));
+		dprintbtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		dprintbtn.setBounds(520, 518, 115, 42);
+		panel_1.add(dprintbtn);
+		
+		JCheckBox incomecbox = new JCheckBox("Income Certificate");
+		incomecbox.setBackground(SystemColor.text);
+		incomecbox.setForeground(new Color(0, 0, 128));
+		incomecbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		incomecbox.setBounds(14, 249, 443, 42);
+		panel_1.add(incomecbox);
+		
+		JButton dclearbtn = new JButton("Clear");
+		dclearbtn.setForeground(new Color(0, 0, 128));
+		dclearbtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		dclearbtn.setBounds(689, 518, 115, 42);
+		panel_1.add(dclearbtn);
+		
+		JCheckBox chckbxNonCreamyLayer = new JCheckBox("Non Creamy Layer Certificate(OBC,SBC,NT,VJ)");
+		chckbxNonCreamyLayer.setForeground(new Color(0, 0, 128));
+		chckbxNonCreamyLayer.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		chckbxNonCreamyLayer.setBackground(Color.WHITE);
+		chckbxNonCreamyLayer.setBounds(14, 308, 443, 42);
+		panel_1.add(chckbxNonCreamyLayer);
+		
+		JCheckBox chckbxPhysicallyHandicapCertificateif = new JCheckBox("Physically Handicap Certificate(If applicable)");
+		chckbxPhysicallyHandicapCertificateif.setForeground(new Color(0, 0, 128));
+		chckbxPhysicallyHandicapCertificateif.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		chckbxPhysicallyHandicapCertificateif.setBackground(Color.WHITE);
+		chckbxPhysicallyHandicapCertificateif.setBounds(475, 189, 489, 42);
+		panel_1.add(chckbxPhysicallyHandicapCertificateif);
+		
+		JCheckBox chckbxPassportSizePhotograph = new JCheckBox("Passport Size Photograph(5)");
+		chckbxPassportSizePhotograph.setForeground(new Color(0, 0, 128));
+		chckbxPassportSizePhotograph.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		chckbxPassportSizePhotograph.setBackground(Color.WHITE);
+		chckbxPassportSizePhotograph.setBounds(14, 369, 443, 42);
+		panel_1.add(chckbxPassportSizePhotograph);
+		
+		JCheckBox chckbxDomicileCertificate = new JCheckBox("Domicile Certificate");
+		chckbxDomicileCertificate.setForeground(new Color(0, 0, 128));
+		chckbxDomicileCertificate.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		chckbxDomicileCertificate.setBackground(Color.WHITE);
+		chckbxDomicileCertificate.setBounds(14, 427, 443, 42);
+		panel_1.add(chckbxDomicileCertificate);
+		
+		JCheckBox chckbxNationality = new JCheckBox("Nationality");
+		chckbxNationality.setForeground(new Color(0, 0, 128));
+		chckbxNationality.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		chckbxNationality.setBackground(Color.WHITE);
+		chckbxNationality.setBounds(475, 73, 489, 42);
+		panel_1.add(chckbxNationality);
+		
+		JCheckBox chckbxElementaryOrIntermediate = new JCheckBox("Elementary or Intermediate Drawing Certificate(If applicable)");
+		chckbxElementaryOrIntermediate.setForeground(new Color(0, 0, 128));
+		chckbxElementaryOrIntermediate.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		chckbxElementaryOrIntermediate.setBackground(Color.WHITE);
+		chckbxElementaryOrIntermediate.setBounds(475, 130, 489, 42);
+		panel_1.add(chckbxElementaryOrIntermediate);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("3 Set of Photo Copies of above Documents");
+		chckbxNewCheckBox.setForeground(new Color(0, 0, 128));
+		chckbxNewCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		chckbxNewCheckBox.setBounds(475, 249, 489, 42);
+		panel_1.add(chckbxNewCheckBox);
+
+	}
+}

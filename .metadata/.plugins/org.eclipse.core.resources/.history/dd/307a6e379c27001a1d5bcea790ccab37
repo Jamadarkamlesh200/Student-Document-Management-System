@@ -1,0 +1,179 @@
+package DOCSYSTEM;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class studentryfrm extends JInternalFrame {
+	private JTextField sname;
+	private JTextField enrollno;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					studentryfrm frame = new studentryfrm();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public studentryfrm() {
+		setVisible(true);
+		setTitle("Student Entry");
+		setResizable(true);
+		setBounds(100, 100, 845, 537);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 0, 829, 501);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblStudentEntry = new JLabel("Student Entry");
+		lblStudentEntry.setBackground(new Color(245, 245, 245));
+		lblStudentEntry.setForeground(new Color(0, 128, 128));
+		lblStudentEntry.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStudentEntry.setFont(new Font("Times New Roman", Font.PLAIN, 34));
+		lblStudentEntry.setBounds(37, 42, 736, 49);
+		panel.add(lblStudentEntry);
+		
+		JLabel lblNewLabel = new JLabel("Student Name");
+		lblNewLabel.setForeground(new Color(0, 128, 128));
+		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		lblNewLabel.setBounds(37, 125, 161, 37);
+		panel.add(lblNewLabel);
+		
+		sname = new JTextField();
+		sname.setBackground(new Color(204, 255, 255));
+		
+		sname.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		sname.setBounds(260, 128, 512, 34);
+		panel.add(sname);
+		sname.setColumns(10);
+		
+		JLabel lblEnrollmentNumber = new JLabel("Enrollment Number");
+		lblEnrollmentNumber.setForeground(new Color(0, 128, 128));
+		lblEnrollmentNumber.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		lblEnrollmentNumber.setBounds(35, 190, 195, 37);
+		panel.add(lblEnrollmentNumber);
+		
+		enrollno = new JTextField();
+		enrollno.setBackground(new Color(204, 255, 255));
+		enrollno.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		enrollno.setColumns(10);
+		enrollno.setBounds(260, 193, 403, 37);
+		panel.add(enrollno);
+		
+		JLabel lblBranch = new JLabel("Branch");
+		lblBranch.setForeground(new Color(0, 128, 128));
+		lblBranch.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		lblBranch.setBounds(35, 260, 195, 37);
+		panel.add(lblBranch);
+		
+		JComboBox bcbox = new JComboBox();
+		bcbox.setBackground(Color.WHITE);
+		bcbox.setForeground(new Color(0, 128, 128));
+		bcbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		bcbox.setBounds(260, 260, 138, 32);
+		panel.add(bcbox);
+		bcbox.addItem("Select");
+		bcbox.addItem("CM");
+		bcbox.addItem("ME");
+		bcbox.addItem("EE");
+		bcbox.addItem("E&TC");
+
+	
+		
+		JLabel lblCategory = new JLabel("Category");
+		lblCategory.setForeground(new Color(0, 128, 128));
+		lblCategory.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		lblCategory.setBounds(29, 330, 127, 37);
+		panel.add(lblCategory);
+		
+		JComboBox ccbox = new JComboBox();
+		ccbox.setBackground(Color.WHITE);
+		ccbox.setForeground(new Color(0, 128, 128));
+		ccbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		ccbox.setBounds(260, 333, 138, 32);
+		panel.add(ccbox);
+		ccbox.addItem("Select");
+		ccbox.addItem("OPEN");
+		ccbox.addItem("OBC");
+		ccbox.addItem("NT");
+		
+		JButton registerbtn = new JButton("Register");
+		registerbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				   dcon d=new dcon();
+				   Connection conn = null;
+				   Statement stmt = null;	
+				   try {
+					Class.forName("com.mysql.jdbc.Driver").newInstance();
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				   
+				   try {
+					conn = DriverManager.getConnection(d.DRIVER_NAME, d.USER_NAME, d.PASSWORD);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		registerbtn.setBorder(new LineBorder(new Color(0, 0, 0)));
+		registerbtn.setBackground(new Color(204, 204, 255));
+		registerbtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		registerbtn.setBounds(475, 410, 175, 49);
+		panel.add(registerbtn);
+		
+		JButton clearbtn = new JButton("Clear");
+		
+		clearbtn.setBorder(new LineBorder(new Color(0, 0, 0)));
+		clearbtn.setBackground(new Color(204, 204, 255));
+		clearbtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		clearbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				sname.setText("");
+				enrollno.setText("");
+				bcbox.setSelectedIndex(0);
+				ccbox.setSelectedIndex(0);
+			}
+		});
+		clearbtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		clearbtn.setBounds(260, 410, 175, 49);
+		panel.add(clearbtn);
+		
+		
+
+	}
+}

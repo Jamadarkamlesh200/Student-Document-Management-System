@@ -1,0 +1,416 @@
+package DOCSYSTEM;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
+import java.awt.Color;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.UIManager;
+import java.awt.SystemColor;
+import javax.swing.border.MatteBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class docverify extends JInternalFrame {
+	private JTextField eenroll;
+	private JTextField dtecode;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					docverify frame = new docverify();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public docverify() {
+		setFont(new Font("Dialog", Font.PLAIN, 22));
+		setBounds(100, 100, 1020, 996);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
+		panel.setBackground(SystemColor.text);
+		panel.setBounds(0, 0, 1004, 169);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblDocumentVerify = new JLabel("Document Verify");
+		lblDocumentVerify.setForeground(new Color(0, 128, 128));
+		lblDocumentVerify.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDocumentVerify.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+		lblDocumentVerify.setBounds(227, 13, 523, 49);
+		panel.add(lblDocumentVerify);
+		
+		JLabel lblEnterEnrollmentNumber = new JLabel("Enter Enrollment Number ");
+		lblEnterEnrollmentNumber.setBackground(SystemColor.text);
+		lblEnterEnrollmentNumber.setForeground(new Color(0, 0, 128));
+		lblEnterEnrollmentNumber.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		lblEnterEnrollmentNumber.setBounds(12, 63, 280, 36);
+		panel.add(lblEnterEnrollmentNumber);
+		
+		JLabel lblSelectBranch = new JLabel("Select Branch");
+		lblSelectBranch.setBackground(SystemColor.text);
+		lblSelectBranch.setForeground(new Color(0, 0, 128));
+		lblSelectBranch.setHorizontalTextPosition(SwingConstants.LEFT);
+		lblSelectBranch.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		lblSelectBranch.setBounds(12, 112, 261, 36);
+		panel.add(lblSelectBranch);
+		
+		eenroll = new JTextField();
+		eenroll.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
+		eenroll.setBackground(new Color(102, 205, 170));
+		eenroll.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		eenroll.setBackground(UIManager.getColor("Button.highlight"));
+		eenroll.setBounds(304, 65, 237, 36);
+		panel.add(eenroll);
+		eenroll.setColumns(10);
+		
+		JComboBox sbranch = new JComboBox();
+		sbranch.setForeground(new Color(0, 0, 128));
+		sbranch.setBackground(Color.WHITE);
+		sbranch.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		sbranch.setBounds(304, 113, 162, 36);
+		panel.add(sbranch);
+		sbranch.addItem("Select");
+		sbranch.addItem("CM");
+		sbranch.addItem("ME");
+		sbranch.addItem("EE");
+		sbranch.addItem("E&TC");
+		
+		JLabel lblDid = new JLabel("DTE Code");
+		lblDid.setForeground(new Color(0, 0, 128));
+		lblDid.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		lblDid.setBackground(Color.WHITE);
+		lblDid.setBounds(576, 63, 129, 36);
+		panel.add(lblDid);
+		
+		dtecode = new JTextField();
+		dtecode.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		dtecode.setColumns(10);
+		dtecode.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
+		dtecode.setBackground(Color.WHITE);
+		dtecode.setBounds(705, 65, 287, 36);
+		panel.add(dtecode);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.control);
+		panel_1.setBounds(0, 172, 1004, 788);
+		getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		JCheckBox ms8thbox = new JCheckBox("8th MarkSheet");
+		ms8thbox.setBackground(SystemColor.text);
+		ms8thbox.setForeground(new Color(0, 0, 128));
+		ms8thbox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				
+			}
+		});
+		ms8thbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		ms8thbox.setBounds(24, 48, 443, 42);
+		panel_1.add(ms8thbox);
+		
+		JLabel lblNewLabel = new JLabel("Document List");
+		lblNewLabel.setForeground(new Color(0, 128, 128));
+		lblNewLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
+		lblNewLabel.setBackground(Color.CYAN);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		lblNewLabel.setBounds(42, 2, 892, 37);
+		panel_1.add(lblNewLabel);
+		
+		JCheckBox lcbox = new JCheckBox("Original Leaving Certificate(L.C)");
+		lcbox.setBackground(SystemColor.text);
+		lcbox.setForeground(new Color(0, 0, 128));
+		lcbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lcbox.setBounds(24, 273, 443, 42);
+		panel_1.add(lcbox);
+		
+		JCheckBox castebox = new JCheckBox("Caste Certificate(If applicable)");
+		castebox.setBackground(SystemColor.text);
+		castebox.setForeground(new Color(0, 0, 128));
+		castebox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		castebox.setBounds(24, 330, 443, 42);
+		panel_1.add(castebox);
+		
+		
+		savebtn.setForeground(new Color(0, 0, 128));
+		savebtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		savebtn.setBounds(294, 733, 115, 42);
+		panel_1.add(savebtn);
+		
+		JButton dprintbtn = new JButton("Print");
+		dprintbtn.setForeground(new Color(0, 0, 128));
+		dprintbtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		dprintbtn.setBounds(452, 733, 115, 42);
+		panel_1.add(dprintbtn);
+		
+		JCheckBox incomebox = new JCheckBox("Income Certificate");
+		incomebox.setBackground(SystemColor.text);
+		incomebox.setForeground(new Color(0, 0, 128));
+		incomebox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		incomebox.setBounds(24, 386, 443, 42);
+		panel_1.add(incomebox);
+		
+		JButton dclearbtn = new JButton("Clear");
+		dclearbtn.setForeground(new Color(0, 0, 128));
+		dclearbtn.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		dclearbtn.setBounds(604, 733, 115, 42);
+		panel_1.add(dclearbtn);
+		
+		JCheckBox NCLbox = new JCheckBox("Non Creamy Layer Certificate(OBC,SBC,NT,VJ)");
+		NCLbox.setForeground(new Color(0, 0, 128));
+		NCLbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		NCLbox.setBackground(Color.WHITE);
+		NCLbox.setBounds(24, 443, 443, 42);
+		panel_1.add(NCLbox);
+		
+		JCheckBox PHCbox = new JCheckBox("Physically Handicap Certificate(If applicable)");
+		PHCbox.setForeground(new Color(0, 0, 128));
+		PHCbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		PHCbox.setBackground(Color.WHITE);
+		PHCbox.setBounds(24, 671, 443, 42);
+		panel_1.add(PHCbox);
+		
+		JCheckBox photobox = new JCheckBox("Passport Size Photograph(5)");
+		photobox.setForeground(new Color(0, 0, 128));
+		photobox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		photobox.setBackground(Color.WHITE);
+		photobox.setBounds(24, 499, 443, 42);
+		panel_1.add(photobox);
+		
+		JCheckBox domicilebox = new JCheckBox("Domicile Certificate");
+		domicilebox.setForeground(new Color(0, 0, 128));
+		domicilebox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		domicilebox.setBackground(Color.WHITE);
+		domicilebox.setBounds(24, 558, 443, 42);
+		panel_1.add(domicilebox);
+		
+		JCheckBox nationbox = new JCheckBox("Nationality");
+		nationbox.setForeground(new Color(0, 0, 128));
+		nationbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		nationbox.setBackground(Color.WHITE);
+		nationbox.setBounds(24, 613, 443, 42);
+		panel_1.add(nationbox);
+		
+		JCheckBox elementarybox = new JCheckBox("Elementary or Intermediate Drawing Certificate(If applicable)");
+		elementarybox.setForeground(new Color(0, 0, 128));
+		elementarybox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		elementarybox.setBackground(Color.WHITE);
+		elementarybox.setBounds(491, 100, 489, 42);
+		panel_1.add(elementarybox);
+		
+		JCheckBox copiesbox = new JCheckBox("3 Set of Photo Copies of above Documents");
+		copiesbox.setForeground(new Color(0, 0, 128));
+		copiesbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		copiesbox.setBackground(Color.WHITE);
+		copiesbox.setBounds(491, 158, 489, 42);
+		panel_1.add(copiesbox);
+		
+		JCheckBox aadharbox = new JCheckBox("Aadhar Card");
+		aadharbox.setForeground(new Color(0, 0, 128));
+		aadharbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		aadharbox.setBackground(Color.WHITE);
+		aadharbox.setBounds(491, 215, 489, 42);
+		panel_1.add(aadharbox);
+		
+		JCheckBox bankpassbox = new JCheckBox("Bank Passbook Xerox Copy");
+		bankpassbox.setForeground(new Color(0, 0, 128));
+		bankpassbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		bankpassbox.setBackground(Color.WHITE);
+		bankpassbox.setBounds(491, 328, 489, 42);
+		panel_1.add(bankpassbox);
+		
+		JCheckBox validitybox = new JCheckBox("Validity Certificate");
+		validitybox.setForeground(new Color(0, 0, 128));
+		validitybox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		validitybox.setBackground(Color.WHITE);
+		validitybox.setBounds(491, 271, 489, 42);
+		panel_1.add(validitybox);
+		
+		JCheckBox GAPbox = new JCheckBox("GAP Certificate(If aaplicable)");
+		GAPbox.setForeground(new Color(0, 0, 128));
+		GAPbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		GAPbox.setBackground(Color.WHITE);
+		GAPbox.setBounds(491, 384, 489, 42);
+		panel_1.add(GAPbox);
+		
+		JCheckBox rationbox = new JCheckBox("Ration Card Xerox");
+		rationbox.setForeground(new Color(0, 0, 128));
+		rationbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		rationbox.setBackground(Color.WHITE);
+		rationbox.setBounds(491, 443, 489, 42);
+		panel_1.add(rationbox);
+		
+		JCheckBox proformabox = new JCheckBox("Proforma Z");
+		proformabox.setForeground(new Color(0, 0, 128));
+		proformabox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		proformabox.setBackground(Color.WHITE);
+		proformabox.setBounds(493, 45, 487, 42);
+		panel_1.add(proformabox);
+		
+		JCheckBox ms12thbox = new JCheckBox("12th MarkSheet");
+		ms12thbox.setForeground(new Color(0, 0, 128));
+		ms12thbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		ms12thbox.setBackground(Color.WHITE);
+		ms12thbox.setBounds(24, 218, 443, 42);
+		panel_1.add(ms12thbox);
+		
+		JCheckBox ms10thbox = new JCheckBox("10th MarkSheet");
+		ms10thbox.setForeground(new Color(0, 0, 128));
+		ms10thbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		ms10thbox.setBackground(Color.WHITE);
+		ms10thbox.setBounds(24, 161, 443, 42);
+		panel_1.add(ms10thbox);
+		
+		JCheckBox ms9thbox = new JCheckBox("9th MarkSheet");
+		ms9thbox.setForeground(new Color(0, 0, 128));
+		ms9thbox.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		ms9thbox.setBackground(Color.WHITE);
+		ms9thbox.setBounds(24, 103, 443, 42);
+		panel_1.add(ms9thbox);
+		
+		JButton savebtn = new JButton("Save");
+		savebtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			//assign variable's
+			String enroll=eenroll.getText();
+			String dteno=dtecode.getText();
+		    String branch= sbranch.getSelectedItem().toString();
+		    //get selectd checkboxes
+		    String ms8th="false";
+		    String ms9th="false";
+		    String ms10th="false";
+		    String ms12th="false";
+		    String lc="false";
+		    String caste="false";
+		    String income="false";
+		    String noncreamy="false";
+		    String passport="false";
+		    String domicile="false";
+		    String nationality="false";
+		    String phc="false";
+		    String proforma="false";
+		    String eidc="false";
+		    String aadhar="false";
+		    String validity="false";
+		    String bankpass="false";
+		    String gap="false";
+		    String ration="false";
+		    //check selected 
+		    if(ms8thbox.isSelected()==true) {
+		    	ms8th="true";
+		    }
+		    if(ms9thbox.isSelected()==true) {
+		    	ms9th="true";
+		    }
+		    if(ms10thbox.isSelected()==true) {
+		    	ms10th="true";
+		    }
+		    if(ms12thbox.isSelected()==true) {
+		    	ms12th="true";
+		    }
+		    if(lcbox.isSelected()==true) {
+		    	lc="true";
+		    }
+		    if(castebox.isSelected()==true) {
+		    	caste="true";
+		    }
+		    if(incomebox.isSelected()==true) {
+		    	income="true";
+		    }
+		    if(NCLbox.isSelected()==true) {
+		    	noncreamy="true";
+		    }
+		    if(photobox.isSelected()==true) {
+		    	passport="true";
+		    }
+		    if(domicilebox.isSelected()==true) {
+		    	domicile="true";
+		    }
+		    if(nationbox.isSelected()==true) {
+		    	nationality="true";
+		    }
+		    if(PHCbox.isSelected()==true) {
+		    	phc="true";
+		    }
+		    if(proformabox.isSelected()==true) {
+		    	proforma="true";
+		    }
+		    if(elementarybox.isSelected()==true) {
+		    	eidc="true";
+		    }
+		    if(aadharbox.isSelected()==true) {
+		    	aadhar="true";
+		    }
+		    if(validitybox.isSelected()==true) {
+		    	validity="true";
+		    }
+		    if(bankpassbox.isSelected()==true) {
+		    	bankpass="true";
+		    }
+		  
+		   
+		  		    
+				 dcon driverobj=new dcon();
+				   Connection conn = null;
+				   PreparedStatement stmt =null;
+				   String sql=null;
+				   String q="insert into docverify(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				    try {
+
+			            Class.forName(driverobj.DRIVER_NAME).newInstance();
+			        } catch (Exception ex) {
+			            
+			        }
+				   try {
+					    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/doc?useTimezone=true&serverTimezone=UTC", driverobj.USER_NAME, driverobj.PASSWORD);
+					    stmt = conn.prepareStatement(q);
+					    sql = "insert into docverify(ENROLL,DTECODE,BRANCH,8thMS) values('"+eenroll.getText()+"','"+dtecode.getText()+"','"+branch+"','"+ms8th+"')";
+						 stmt.executeUpdate(sql);	
+						 JOptionPane.showMessageDialog(null, "Record Inserted");
+						 stmt.close();
+					     conn.close();
+					     				      
+					      }
+					 catch (SQLException ex) {
+						 System.out.print(ex);
+					    // handle any errors
+					}
+			}
+		});
+
+	}
+}

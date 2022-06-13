@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.wb.internal.core.editor.actions.errors.ErrorsDialog">
+		<item value="515" key="x"/>
+		<item value="890" key="width"/>
+		<item value="102" key="y"/>
+		<item value="826" key="height"/>
+	</section>
+	<section name="org.eclipse.wb.internal.core.editor.palette.dialogs.ImportArchiveDialog">
+		<item value="610" key="x"/>
+		<item value="700" key="width"/>
+		<item value="262" key="y"/>
+		<item value="505" key="height"/>
+		<list key="HISTORY_JAR_LIST">
+			<item value="F:\Java\project Jar File\rs2xml.jar"/>
+		</list>
+	</section>
+</section>
